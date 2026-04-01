@@ -160,17 +160,6 @@ const BorderGlow = ({
     [getCenterOfElement]
   );
 
-  const handlePointerMove = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      if (e.pointerType === "touch") return;
-      const card = cardRef.current;
-      if (!card) return;
-
-      updatePosition(card, e.clientX, e.clientY);
-    },
-    [updatePosition]
-  );
-
   const updatePosition = useCallback(
     (card: HTMLDivElement, clientX: number, clientY: number) => {
       const rect = card.getBoundingClientRect();
@@ -182,6 +171,16 @@ const BorderGlow = ({
       card.style.setProperty("--cursor-angle", `${angle.toFixed(3)}deg`);
     },
     [getEdgeProximity, getCursorAngle]
+  );
+
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent<HTMLDivElement>) => {
+      if (e.pointerType === "touch") return;
+      const card = cardRef.current;
+      if (!card) return;
+      updatePosition(card, e.clientX, e.clientY);
+    },
+    [updatePosition]
   );
 
   const handlePointerDown = useCallback(
