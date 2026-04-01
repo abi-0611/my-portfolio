@@ -181,6 +181,12 @@ const BorderGlow = ({
     [getEdgeProximity, getCursorAngle]
   );
 
+  const handlePointerLeave = useCallback(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.style.setProperty("--edge-proximity", "0");
+  }, []);
+
   useEffect(() => {
     if (!animated || !cardRef.current) return;
     const card = cardRef.current;
@@ -235,6 +241,7 @@ const BorderGlow = ({
     <div
       ref={cardRef}
       onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
       className={`border-glow-card ${className}`}
       style={
         {

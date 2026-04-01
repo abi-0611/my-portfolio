@@ -27,8 +27,8 @@ export function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center pt-4 px-4">
-      <div className="flex items-center gap-4">
+    <div className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center pt-4 px-2 sm:px-4">
+      <div className="flex items-center gap-2 sm:gap-4 max-w-[calc(100vw-1rem)]">
         <SpotlightNavbar
           items={navItems}
           onItemClick={handleItemClick}

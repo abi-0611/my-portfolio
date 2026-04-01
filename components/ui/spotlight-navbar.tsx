@@ -127,7 +127,7 @@ export function SpotlightNavbar({
                   handleItemClick(item, idx);
                 }}
                 className={cn(
-                  "px-5 py-3 text-base font-medium transition-colors duration-200 rounded-full",
+                  "px-2.5 py-2 text-xs sm:px-4 sm:py-2.5 sm:text-sm md:px-5 md:py-3 md:text-base font-medium transition-colors duration-200 rounded-full",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 dark:focus-visible:ring-white/30",
                   activeIndex === idx
                     ? "text-black dark:text-white"
