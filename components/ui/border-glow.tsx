@@ -165,20 +165,31 @@ const BorderGlow = ({
       const card = cardRef.current;
       if (!card) return;
 
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      updatePosition(card, e.clientX, e.clientY);
+    },
+    [updatePosition]
+  );
 
+  const updatePosition = useCallback(
+    (card: HTMLDivElement, clientX: number, clientY: number) => {
+      const rect = card.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
       const edge = getEdgeProximity(card, x, y);
       const angle = getCursorAngle(card, x, y);
-
-      card.style.setProperty(
-        "--edge-proximity",
-        `${(edge * 100).toFixed(3)}`
-      );
+      card.style.setProperty("--edge-proximity", `${(edge * 100).toFixed(3)}`);
       card.style.setProperty("--cursor-angle", `${angle.toFixed(3)}deg`);
     },
     [getEdgeProximity, getCursorAngle]
+  );
+
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent<HTMLDivElement>) => {
+      const card = cardRef.current;
+      if (!card) return;
+      updatePosition(card, e.clientX, e.clientY);
+    },
+    [updatePosition]
   );
 
   const handlePointerLeave = useCallback(() => {
@@ -240,6 +251,7 @@ const BorderGlow = ({
   return (
     <div
       ref={cardRef}
+      onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       className={`border-glow-card ${className}`}
