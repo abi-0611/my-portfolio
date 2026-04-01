@@ -162,6 +162,7 @@ const BorderGlow = ({
 
   const handlePointerMove = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
+      if (e.pointerType === "touch") return;
       const card = cardRef.current;
       if (!card) return;
 
@@ -185,6 +186,7 @@ const BorderGlow = ({
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
+      if (e.pointerType === "touch") return;
       const card = cardRef.current;
       if (!card) return;
       updatePosition(card, e.clientX, e.clientY);
